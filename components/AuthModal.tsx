@@ -42,7 +42,7 @@ const AuthModal = () => {
     >
       <Auth
         supabaseClient={supabaseClient}
-        providers={['google', 'facebook']}
+        providers={['github']}
         magicLink={true}
         appearance={{
           theme: ThemeSupa,
