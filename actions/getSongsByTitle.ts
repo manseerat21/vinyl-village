@@ -8,6 +8,10 @@ const getSongsByTitle = async (title: string): Promise<Song[]> => {
         cookies: cookies
     });
 
+    const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
     if (!title) {
         const allSongs = await getSongs();
     }
@@ -16,6 +20,7 @@ const getSongsByTitle = async (title: string): Promise<Song[]> => {
     .from('songs')
     .select('*')
     .ilike('title', `%${title}%`)
+    .eq('user_id', session?.user?.id)
     .order('created_at', { ascending: false});
 
     if (error) {
