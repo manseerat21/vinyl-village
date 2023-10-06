@@ -19,7 +19,7 @@ interface LibraryProps {
 const Library: React.FC<LibraryProps> = ({
   songs
 }) => {
-  const { user, subscription } = useUser();
+  const { user } = useUser();
   const uploadModal = useUploadModal();
   const authModal = useAuthModal();
 
