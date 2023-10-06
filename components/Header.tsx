@@ -8,7 +8,9 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { toast } from "react-hot-toast";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
+import { AiOutlinePlus } from "react-icons/ai";
 
+import useUploadModal from "@/hooks/useUploadModal";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import usePlayer from "@/hooks/usePlayer";
@@ -27,9 +29,19 @@ const Header: React.FC<HeaderProps> = ({
   const player = usePlayer();
   const router = useRouter();
   const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
 
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
+
+  const onClick = () => {
+    if (!user) {
+      return authModal.onOpen();
+    }
+  
+  
+    return uploadModal.onOpen();
+  }
 
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
@@ -118,9 +130,22 @@ const Header: React.FC<HeaderProps> = ({
             <BiSearch className="text-black" size={20} />
           </button>
         </div>
+        
         <div className="flex justify-between items-center gap-x-4">
           {user ? (
             <div className="flex gap-x-4 items-center">
+              <div className="flex md:hidden gap-x-2 items-center">
+            <AiOutlinePlus 
+          onClick={onClick} 
+          size={20} 
+          className="
+            text-white 
+            cursor-pointer 
+            hover:text-neutral-400 
+            transition
+          "
+        />
+        </div>
               <Button 
                 onClick={handleLogout} 
                 className="bg-white px-6 py-2"
