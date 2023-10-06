@@ -28,7 +28,7 @@ const UploadModal = () => {
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      author: '',
+      artist: '',
       title: '',
       song: null,
       image: null,
@@ -97,7 +97,7 @@ const UploadModal = () => {
         .insert({
           user_id: user.id,
           title: values.title,
-          author: values.author,
+          artist: values.artist,
           image_path: imageData.path,
           song_path: songData.path
         });
@@ -136,10 +136,10 @@ const UploadModal = () => {
           placeholder="Song title"
         />
         <Input
-          id="author"
+          id="artist"
           disabled={isLoading}
-          {...register('author', { required: true })}
-          placeholder="Song author"
+          {...register('artist', { required: true })}
+          placeholder="Song artist"
         />
         <div>
           <div className="pb-1">

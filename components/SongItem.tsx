@@ -12,8 +12,8 @@ interface SongItemProps {
 const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
   const imagePath = useLoadImage(data);
 
-  const authorSearchLink = `https://www.google.com/search?q=${encodeURIComponent(
-    data.author
+  const artistSearchLink = `https://www.google.com/search?q=${encodeURIComponent(
+    data.artist
   )}`;
 
   return (
@@ -64,8 +64,8 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
             truncate
           "
         >
-          <a href={authorSearchLink} target="_blank" rel="noopener noreferrer">
-            {data.author}
+          <a href={artistSearchLink} target="_blank" rel="noopener noreferrer">
+            {data.artist}
           </a>
         </p>
       </div>
