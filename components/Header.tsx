@@ -145,7 +145,7 @@ const Header: React.FC<HeaderProps> = ({
                     font-medium
                   "
                 >
-                  Sign up
+                  sign up
                 </Button>
               </div>
               <div>
