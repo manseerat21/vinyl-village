@@ -34,7 +34,7 @@ export const MyUserContextProvider = (props: Props) => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
 
   const getUserDetails = () => supabase.from('users').select('*').single();
-  
+
   useEffect(() => {
     if (user && !isLoadingData && !userDetails) {
       setIsloadingData(true);
@@ -51,8 +51,7 @@ export const MyUserContextProvider = (props: Props) => {
     } else if (!user && !isLoadingUser && !isLoadingData) {
       setUserDetails(null);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, isLoadingUser, isLoadingData, userDetails]);
+  }, [user, isLoadingUser]);
 
   const value = {
     accessToken,
