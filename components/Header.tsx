@@ -3,7 +3,6 @@
 import { twMerge } from "tailwind-merge";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { useRouter } from "next/navigation";
-import { FaUserAlt } from "react-icons/fa";
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { toast } from "react-hot-toast";
 import { HiHome } from "react-icons/hi";
@@ -12,6 +11,7 @@ import { useSession } from "@supabase/auth-helpers-react";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import usePlayer from "@/hooks/usePlayer";
+import Image from "next/image";
 
 import Button from "./Button";
 
@@ -129,11 +129,16 @@ const Header: React.FC<HeaderProps> = ({
               >
                 Logout
               </Button>
-              <Button 
-                onClick={() => router.push('/account')} 
+              <Button
+                onClick={() => router.push('/account')}
                 className="bg-white"
               >
-                <FaUserAlt />
+                <Image
+                  src={user.user_metadata?.avatar_url || '/images/liked.png'}
+                  alt="user-image"
+                  width={60}
+                  height={60}
+                />
               </Button>
             </div>
           ) : (
