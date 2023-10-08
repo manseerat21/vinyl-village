@@ -129,17 +129,13 @@ const Header: React.FC<HeaderProps> = ({
               >
                 Logout
               </Button>
-              <Button
-                onClick={() => router.push('/account')}
-                className="bg-white"
-              >
                 <Image
                   src={user.user_metadata?.avatar_url || '/images/liked.png'}
                   alt="user-image"
                   width={60}
                   height={60}
+                  style={{ borderRadius: '50%', overflow: 'hidden' }}
                 />
-              </Button>
             </div>
           ) : (
             <>
