@@ -132,8 +132,8 @@ const Header: React.FC<HeaderProps> = ({
                 <Image
                   src={user.user_metadata?.avatar_url || '/images/liked.png'}
                   alt="user-image"
-                  width={60}
-                  height={60}
+                  width={70}
+                  height={70}
                   style={{ borderRadius: '50%', overflow: 'hidden' }}
                 />
             </div>
