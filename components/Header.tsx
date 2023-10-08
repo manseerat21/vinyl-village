@@ -153,9 +153,9 @@ const Header: React.FC<HeaderProps> = ({
               >
                 Logout
               </Button>
-                <Image src={session?.user?.image} alt='user-image' width={60} height={60}
-        className='hover:bg-gray-300 p-2
-        rounded-full cursor-pointer'/>
+                <Image src={session?.user?.image!} alt='user-image' width={60} height={60}
+                  className='hover:bg-gray-300 p-2
+                  rounded-full cursor-pointer'/>
             </div>
           ) : (
             <>
