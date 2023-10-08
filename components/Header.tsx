@@ -2,15 +2,13 @@
 
 import { twMerge } from "tailwind-merge";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { FaUserAlt } from "react-icons/fa";
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { toast } from "react-hot-toast";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
-import { AiOutlinePlus } from "react-icons/ai";
-import Image from "next/image";
-import useUploadModal from "@/hooks/useUploadModal";
+import { useSession } from "@supabase/auth-helpers-react";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import usePlayer from "@/hooks/usePlayer";
@@ -26,23 +24,14 @@ const Header: React.FC<HeaderProps> = ({
   children,
   className,
 }) => {
+  const session = useSession();
   const player = usePlayer();
   const router = useRouter();
-  const {data: session } = useSession();
   const authModal = useAuthModal();
-  const uploadModal = useUploadModal();
+  console.log(session)
 
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
-
-  const onClick = () => {
-    if (!user) {
-      return authModal.onOpen();
-    }
-  
-  
-    return uploadModal.onOpen();
-  }
 
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
@@ -131,31 +120,21 @@ const Header: React.FC<HeaderProps> = ({
             <BiSearch className="text-black" size={20} />
           </button>
         </div>
-        
         <div className="flex justify-between items-center gap-x-4">
           {user ? (
             <div className="flex gap-x-4 items-center">
-              <div className="flex md:hidden gap-x-2 items-center">
-            <AiOutlinePlus 
-          onClick={onClick} 
-          size={20} 
-          className="
-            text-white 
-            cursor-pointer 
-            hover:text-neutral-400 
-            transition
-          "
-        />
-        </div>
               <Button 
                 onClick={handleLogout} 
                 className="bg-white px-6 py-2"
               >
                 Logout
               </Button>
-                <Image src={session?.user?.image!} alt='user-image' width={60} height={60}
-                  className='hover:bg-gray-300 p-2
-                  rounded-full cursor-pointer'/>
+              <Button 
+                onClick={() => router.push('/account')} 
+                className="bg-white"
+              >
+                <FaUserAlt />
+              </Button>
             </div>
           ) : (
             <>
@@ -168,7 +147,7 @@ const Header: React.FC<HeaderProps> = ({
                     font-medium
                   "
                 >
-                  sign up
+                  Sign up
                 </Button>
               </div>
               <div>
