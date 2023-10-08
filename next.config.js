@@ -2,7 +2,8 @@
 const nextConfig = {
     images: {
         domains: [
-            "trmsgtfovxtacxdjhkwx.supabase.co"
+            "trmsgtfovxtacxdjhkwx.supabase.co",
+            'lh3.googleusercontent.com'
         ]
     }
 }

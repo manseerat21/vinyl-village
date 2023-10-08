@@ -2,14 +2,14 @@
 
 import { twMerge } from "tailwind-merge";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FaUserAlt } from "react-icons/fa";
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { toast } from "react-hot-toast";
 import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
-
+import Image from "next/image";
 import useUploadModal from "@/hooks/useUploadModal";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
@@ -28,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const player = usePlayer();
   const router = useRouter();
+  const {data: session } = useSession();
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
 
@@ -152,12 +153,9 @@ const Header: React.FC<HeaderProps> = ({
               >
                 Logout
               </Button>
-              <Button 
-                onClick={() => router.push('/account')} 
-                className="bg-white"
-              >
-                <FaUserAlt />
-              </Button>
+                <Image src={session?.user?.image} alt='user-image' width={60} height={60}
+        className='hover:bg-gray-300 p-2
+        rounded-full cursor-pointer'/>
             </div>
           ) : (
             <>
